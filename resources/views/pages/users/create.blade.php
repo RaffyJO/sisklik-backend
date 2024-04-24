@@ -16,21 +16,29 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>Advanced Forms</h1>
+                <h1>Form Add User</h1>
                 <div class="section-header-breadcrumb">
                     <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                    <div class="breadcrumb-item"><a href="#">Forms</a></div>
-                    <div class="breadcrumb-item">Users</div>
+                    <div class="breadcrumb-item"><a href="#">Users</a></div>
+                    <div class="breadcrumb-item">Forms</div>
                 </div>
             </div>
-
             <div class="section-body">
-                <h2 class="section-title">Users</h2>
+                <div class="row">
+                    <div class="col">
+                        <h2 class="section-title">Users</h2>
+                    </div>
+                    <div class="col text-right">
+                        <div class="section-header-button">
+                            <a href="{{ route('users.index') }}" class="btn btn-primary">Back</a>
+                        </div>
+                    </div>
+                </div> 
                 <div class="card">
                     <form action="{{ route('users.store') }}" method="POST">
                         @csrf
                         <div class="card-header">
-                            <h4>Input Text</h4>
+                            <h4>Input Data User</h4>
                         </div>
                         <div class="card-body">
                             <div class="form-group">
@@ -108,7 +116,6 @@
                         </div>
                     </form>
                 </div>
-
             </div>
         </section>
     </div>

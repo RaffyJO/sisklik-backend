@@ -35,6 +35,8 @@ class DoctorController extends Controller
             'sip' => 'required',
             'address' => 'nullable',
             'photo' => 'nullable',
+            'id_ihs' => 'required',
+            'nik' => 'required',
         ]);
 
         $doctor = new Doctor();
@@ -44,8 +46,13 @@ class DoctorController extends Controller
         $doctor->phone = $request->phone;
         $doctor->sip = $request->sip;
         $doctor->address = $request->address;
-        if ($request->photo) {
-            $doctor->photo = $request->photo;
+        $doctor->id_ihs = $request->id_ihs;
+        $doctor->nik = $request->nik;
+        if ($request->hasFile('photo')) {
+            $photo = $request->file('photo');
+            $photo_name = time() . '.' . $photo->getClientOriginalExtension(); // Generate unique file name
+            $photo->storeAs('public/doctors', $photo_name); // Store the photo with the unique name in the specified directory
+            $doctor->photo = 'storage/doctors/' . $photo_name; // Assign the path to the photo column in the doctor entity
         }
         $doctor->save();
 
@@ -74,6 +81,8 @@ class DoctorController extends Controller
             'sip' => 'required',
             'address' => 'nullable',
             'photo' => 'nullable',
+            'id_ihs' => 'required',
+            'nik' => 'required',
         ]);
 
         $doctor = Doctor::find($id);
@@ -83,8 +92,13 @@ class DoctorController extends Controller
         $doctor->phone = $request->phone;
         $doctor->sip = $request->sip;
         $doctor->address = $request->address;
-        if ($request->photo) {
-            $doctor->photo = $request->photo;
+        $doctor->id_ihs = $request->id_ihs;
+        $doctor->nik = $request->nik;
+        if ($request->hasFile('photo')) {
+            $photo = $request->file('photo');
+            $photo_name = time() . '.' . $photo->getClientOriginalExtension(); // Generate unique file name
+            $photo->storeAs('public/doctors', $photo_name); // Store the photo with the unique name in the specified directory
+            $doctor->photo = 'storage/doctors/' . $photo_name; // Assign the path to the photo column in the doctor entity
         }
         $doctor->save();
 

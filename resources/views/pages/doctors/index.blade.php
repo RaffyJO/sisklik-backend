@@ -29,10 +29,8 @@
                 </div>
                 <h2 class="section-title">Doctors</h2>
                 <p class="section-lead">
-                    You can manage all Doctors, such as editing, deleting and more.
+                    Anda dapat mengatur semua data dokter, seperti menambahkan, mengedit, menghapus, dan lainnya.
                 </p>
-
-
                 <div class="row mt-4">
                     <div class="col-12">
                         <div class="card">
@@ -64,17 +62,23 @@
                                 <div class="table-responsive">
                                     <table class="table-striped table">
                                         <tr>
-
+                                            <th>Photo</th>
                                             <th>Name</th>
                                             <th>Email</th>
                                             <th>Phone</th>
                                             <th>Specialist</th>
-                                            <th>Created At</th>
                                             <th>Action</th>
                                         </tr>
                                         @foreach ($doctors as $doctor)
                                             <tr>
-
+                                                <td>
+                                                    @if ($doctor->photo)
+                                                        <img src="{{ asset('' . $doctor->photo) }}" alt=""
+                                                            width="50px" class="img-thumbnail">
+                                                    @else
+                                                        <span class="badge badge-danger">No Image</span>
+                                                    @endif
+                                                </td>
                                                 <td>{{ $doctor->name }}
                                                 </td>
                                                 <td>
@@ -86,7 +90,6 @@
                                                 <td>
                                                     {{ $doctor->specialist }}
                                                 </td>
-                                                <td>{{ $doctor->created_at }}</td>
                                                 <td>
                                                     <div class="d-flex justify-content-center">
                                                         <a href='{{ route('doctors.edit', $doctor->id) }}'
@@ -94,7 +97,6 @@
                                                             <i class="fas fa-edit"></i>
                                                             Edit
                                                         </a>
-
                                                         <form action="{{ route('doctors.destroy', $doctor->id) }}" method="POST"
                                                             class="ml-2">
                                                             <input type="hidden" name="_method" value="DELETE" />
@@ -108,8 +110,6 @@
                                                 </td>
                                             </tr>
                                         @endforeach
-
-
                                     </table>
                                 </div>
                                 <div class="float-right">
