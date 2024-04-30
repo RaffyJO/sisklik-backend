@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('doctor_schedules', function (Blueprint $table) {
             $table->id();
             $table->foreignId('doctor_id')->constrained('doctors');
-            $table->string('day');
+            $table->enum('day', ['senin', 'selasa', 'rabu', 'kamis', 'jumat', 'sabtu', 'minggu']);
             $table->string('time');
-            $table->string('status')->default('active');
+            $table->enum('status', ['active', 'non active'])->default('active');
             $table->string('note')->nullable()->default('-');
             $table->timestamps();
         });

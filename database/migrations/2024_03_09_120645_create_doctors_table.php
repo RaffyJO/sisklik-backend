@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('doctors', function (Blueprint $table) {
             $table->id();
-            $table->string('id_ihs')->nullable();
-            $table->string('nik')->nullable();
+            $table->string('id_ihs', 11)->unique();
+            $table->string('nik', 16)->unique();
             $table->string('name');
             $table->string('specialist');
-            $table->string('phone');
+            $table->string('phone', 15);
             $table->string('email');
             $table->string('photo')->nullable();
             $table->string('address')->nullable();

@@ -49,7 +49,7 @@
                                 <div class="float-right">
                                     <form method="GET" action="{{ route('doctor-schedules.index') }}">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="Search" name="name">
+                                            <input type="text" class="form-control" placeholder="Search" name="doctor_name">
                                             <div class="input-group-append">
                                                 <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                                             </div>
@@ -82,7 +82,7 @@
                                                     {{ ucwords($schedule->status) }}
                                                 </td>                                                                                               
                                                 <td>
-                                                    {{ $schedule->note }}
+                                                    {{ ucfirst($schedule->note) }}
                                                 </td>
                                                 <td>
                                                     <div class="d-flex justify-content-center">

@@ -80,7 +80,7 @@
                                                     {{ $user->phone }}
                                                 </td>
                                                 <td>
-                                                    {{ $user->role }}
+                                                    {{ ucfirst($user->role) }}
                                                 </td>
                                                 <td>{{ $user->created_at }}</td>
                                                 <td>

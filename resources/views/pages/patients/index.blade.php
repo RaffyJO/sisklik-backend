@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Doctors')
+@section('title', 'Patients')
 
 @push('style')
     <!-- CSS Libraries -->
@@ -11,14 +11,14 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>Doctors</h1>
+                <h1>Patients</h1>
                 <div class="section-header-button">
-                    <a href="{{ route('doctors.create') }}" class="btn btn-primary">Add New</a>
+                    <a href="{{ route('patients.create') }}" class="btn btn-primary">Add New</a>
                 </div>
                 <div class="section-header-breadcrumb">
                     <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                    <div class="breadcrumb-item"><a href="#">Doctors</a></div>
-                    <div class="breadcrumb-item">All Doctors</div>
+                    <div class="breadcrumb-item"><a href="#">Patients</a></div>
+                    <div class="breadcrumb-item">All Patients</div>
                 </div>
             </div>
             <div class="section-body">
@@ -27,15 +27,15 @@
                         @include('layouts.alert')
                     </div>
                 </div>
-                <h2 class="section-title">Doctors</h2>
+                <h2 class="section-title">Patients</h2>
                 <p class="section-lead">
-                    Anda dapat mengatur semua data dokter, seperti menambahkan, mengedit, menghapus, dan lainnya.
+                    Anda dapat melihat dan menghapus semua data pasien.
                 </p>
                 <div class="row mt-4">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>All Doctors</h4>
+                                <h4>All Patients</h4>
                             </div>
                             <div class="card-body">
                                 <div class="float-left">
@@ -47,9 +47,9 @@
                                     </select>
                                 </div>
                                 <div class="float-right">
-                                    <form method="GET" action="{{ route('doctors.index') }}">
+                                    <form method="GET" action="{{ route('patients.index') }}">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="Search" name="name">
+                                            <input type="text" class="form-control" placeholder="Search" name="nik">
                                             <div class="input-group-append">
                                                 <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                                             </div>
@@ -62,42 +62,33 @@
                                 <div class="table-responsive">
                                     <table class="table-striped table">
                                         <tr>
-                                            <th>Photo</th>
+                                            <th>NIK</th>
                                             <th>Name</th>
+                                            <th>Gender</th>
                                             <th>Email</th>
                                             <th>Phone</th>
-                                            <th>Specialist</th>
                                             <th>Action</th>
                                         </tr>
-                                        @foreach ($doctors as $doctor)
+                                        @foreach ($patients as $patient)
                                             <tr>
                                                 <td>
-                                                    @if ($doctor->photo)
-                                                        <img src="{{ asset('' . $doctor->photo) }}" alt=""
-                                                            width="50px" class="img-thumbnail">
-                                                    @else
-                                                        <span class="badge badge-danger">No Image</span>
-                                                    @endif
-                                                </td>
-                                                <td>{{ $doctor->name }}
+                                                    {{ $patient->nik }}
                                                 </td>
                                                 <td>
-                                                    {{ $doctor->email }}
+                                                    {{ $patient->name }}
                                                 </td>
                                                 <td>
-                                                    {{ $doctor->phone }}
+                                                    {{ ucfirst($patient->gender) }}
                                                 </td>
                                                 <td>
-                                                    {{ ucfirst($doctor->specialist) }}
-                                                </td>
+                                                    {{ $patient->email ? $patient->email : '-' }}
+                                                </td>                                                
+                                                <td>
+                                                    {{ $patient->phone }}
+                                                </td>     
                                                 <td>
                                                     <div class="d-flex justify-content-center">
-                                                        <a href='{{ route('doctors.edit', $doctor->id) }}'
-                                                            class="btn btn-sm btn-info btn-icon">
-                                                            <i class="fas fa-edit"></i>
-                                                            Edit
-                                                        </a>
-                                                        <form action="{{ route('doctors.destroy', $doctor->id) }}" method="POST"
+                                                        <form action="{{ route('patients.destroy', $patient->id) }}" method="POST"
                                                             class="ml-2">
                                                             <input type="hidden" name="_method" value="DELETE" />
                                                             <input type="hidden" name="_token"
@@ -113,7 +104,7 @@
                                     </table>
                                 </div>
                                 <div class="float-right">
-                                    {{ $doctors->withQueryString()->links() }}
+                                    {{ $patients->withQueryString()->links() }}
                                 </div>
                             </div>
                         </div>
